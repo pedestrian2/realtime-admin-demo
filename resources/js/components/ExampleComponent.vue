@@ -15,8 +15,14 @@
 </template>
 
 <script>
+    import io from 'socket.io-client'
     export default {
         mounted() {
+            var socket = io('http://local.realtime.com:3000');
+            socket.on('news', function (data) {
+                console.log(data);
+                socket.emit('my other event', { my: 'data' });
+            });
             console.log('Component mounted.')
         }
     }
